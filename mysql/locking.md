@@ -180,7 +180,7 @@ mysql> select * from test_lock;
     ```
     发现最后一行事务2在请求b=15的Next-Key Lock，由此可知在扫描时使用Next-Key Lock逐步加锁，参考二级索引等值查询有匹配行，在Next-Key Lock加锁成功后，再根据条件释放Gap Lock与Record Lock，但b=15行此时有Record Lock，只能Waiting。
 
-    结论：对主键进行更改时，会S锁定二级唯一索引的相关GAP(b=12的两端GAP)，二级唯一索引中原行锁包括两端GAP，原行Record，目标行包括左侧GAP。此时GAP内无法插入，只能读取。
+    结论：对主键进行更改时，会S锁定二级唯一索引的相关GAP(b=15的两端GAP)，二级唯一索引中原行锁包括两端GAP，原行Record，目标行包括左侧GAP。此时GAP内无法插入，只能读取。
 
 2. 非等值查询
 - 无匹配行
