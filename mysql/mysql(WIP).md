@@ -143,3 +143,10 @@ Gap Lock的唯一目的是防止其他事务插入间隙。
 - select * from performance_schema.data_locks;
 - select ENGINE_TRANSACTION_ID as trx_id, OBJECT_SCHEMA, OBJECT_NAME, INDEX_NAME, OBJECT_INSTANCE_BEGIN, LOCK_TYPE, LOCK_MODE, LOCK_STATUS, LOCK_DATA from performance_schema.data_locks;
 - SET GLOBAL TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+- show variables like '%general_log%';
+- show variables like '%log_output%'; 
+> SET GLOBAL log_output = 'FILE';  SET GLOBAL general_log = 'ON';   //日志开启（日志输出到文件）
+> SET GLOBAL log_output = 'FILE';  SET GLOBAL general_log = 'OFF';  //日志关闭
+或者
+> SET GLOBAL log_output = 'TABLE'; SET GLOBAL general_log = 'ON';   //日志开启（日志输出到表：mysql.general_log）
+> SET GLOBAL log_output = 'TABLE'; SET GLOBAL general_log = 'OFF';  //日志关闭
